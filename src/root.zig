@@ -113,7 +113,7 @@ pub inline fn NULL(comptime BASE_POINTER_TYPE: type) BASE_POINTER_TYPE {
     return @ptrFromInt(@as(c_int, 0));
 }
 
-inline fn isNull(ptr: anytype) bool {
+pub inline fn isNull(ptr: anytype) bool {
     return switch (@typeInfo(@TypeOf(ptr))) {
         .pointer => @intFromPtr(ptr) == 0,
         .null => true,
@@ -121,6 +121,6 @@ inline fn isNull(ptr: anytype) bool {
     };
 }
 
-inline fn PtrCast(comptime TARGET: type, ptr: anytype) TARGET {
+pub inline fn PtrCast(comptime TARGET: type, ptr: anytype) TARGET {
     return coerceTo(TARGET, ptr) orelse NULL(TARGET);
 }
